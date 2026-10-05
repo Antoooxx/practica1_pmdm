@@ -1,0 +1,58 @@
+[gd_scene format=3 uid="uid://caa3jv35j3bml"]
+
+[ext_resource type="Script" uid="uid://bfq5w8varfq6s" path="res://scripts/bala_emilio.gd" id="1_4i5h6"]
+[ext_resource type="Texture2D" uid="uid://7muuaiuw0n4k" path="res://sprites/old_man/Old Man-jump.png" id="2_t2j67"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pd6o6"]
+atlas = ExtResource("2_t2j67")
+region = Rect2(0, 256, 256, 256)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_lfkbx"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pd6o6")
+}],
+"loop": 1,
+"name": &"emilio",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_lfkbx"]
+radius = 36.0
+height = 216.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_aui74"]
+radius = 51.0
+height = 250.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_t2j67"]
+size = Vector2(176, 91)
+
+[node name="bala_emilio" type="Node2D" unique_id=813240547]
+script = ExtResource("1_4i5h6")
+
+[node name="bala_emilio" type="StaticBody2D" parent="." unique_id=1542881539]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="bala_emilio" unique_id=996490291]
+sprite_frames = SubResource("SpriteFrames_lfkbx")
+animation = &"emilio"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="bala_emilio" unique_id=1595112301]
+position = Vector2(0, -25)
+shape = SubResource("CapsuleShape2D_lfkbx")
+
+[node name="Area2D" type="Area2D" parent="bala_emilio" unique_id=994626534]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="bala_emilio/Area2D" unique_id=2062612033]
+position = Vector2(0, -26)
+shape = SubResource("CapsuleShape2D_aui74")
+
+[node name="area_tp" type="Area2D" parent="." unique_id=2102658955]
+position = Vector2(0, -1491)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="area_tp" unique_id=677350362]
+shape = SubResource("RectangleShape2D_t2j67")
+
+[connection signal="area_entered" from="area_tp" to="." method="_on_area_tp_area_entered"]
+[connection signal="area_exited" from="area_tp" to="." method="_on_area_tp_area_exited"]
