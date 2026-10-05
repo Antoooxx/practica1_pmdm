@@ -3,7 +3,7 @@ extends CharacterBody2D
 
 const SPEED = 450.0
 const JUMP_VELOCITY = -400.0
-const NUM_SALTOS = 2
+const NUM_SALTOS = 100 #Saltos "infinitos"
 
 var cont_saltos = 0
 
@@ -63,4 +63,12 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 		esta_muerto = true
 
 func _on_area_2d_body_exited(body: Node2D) -> void:
+	body_entered = false
+
+
+func _on_bala_emilio_anim_player_body_entered(body: Node2D) -> void:
+	body_entered = true
+	esta_muerto = true
+
+func _on_bala_emilio_anim_player_body_exited(body: Node2D) -> void:
 	body_entered = false
